@@ -1,6 +1,7 @@
 """incremental search in movie database"""
 
 def unify_dicts(dict1, dict2):
+    """recursive update of dicts"""
     dict3 = {}
     dict3.update(dict1)
     for key, value in dict2.items():
@@ -15,6 +16,7 @@ def unify_dicts(dict1, dict2):
 
 
 def get_letter_dict(title, movie):
+    """recursive creation of trie-like dictionary structure"""
     if not title:
         return {'@': movie}
     else:
@@ -22,19 +24,20 @@ def get_letter_dict(title, movie):
 
 
 def build_index(data):
+    """construction of letter index for incremental search"""
     letter_index = {}
     for movie in data:
         title = movie[0]
-        d = get_letter_dict(title, movie)
-        letter_index = unify_dicts(letter_index, d)
+        letter_dict = get_letter_dict(title, movie)
+        letter_index = unify_dicts(letter_index, letter_dict)
     return letter_index
 
 
-def search(fn):
+def search(filename):
+    """entry point for incremental search"""
     data = [(title.strip(), int(year), genres.split(','))
             for title, year, genres in [line.strip().split('\t')
-                                        for line in open(fn)]]
-    
+                                        for line in open(filename)]]
     letter_index = build_index(data)
     letter = raw_input()
     curr_dict = letter_index[letter]
@@ -49,6 +52,7 @@ def search(fn):
                 print 'not found :('
                 break
             curr_dict = curr_dict[letter]
-        
+
+
 if __name__ == "__main__":
     search("data/movies.tsv")

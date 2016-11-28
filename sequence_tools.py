@@ -1,3 +1,5 @@
+"""Solutions for Day 4 excercises"""
+
 from collections import OrderedDict
 
 def to_sens(text):
@@ -24,8 +26,9 @@ def to_sens2(szoveg):
 
 
 def test_to_sens():
+    """test for to_sens"""
     szoveg = open('data/sample_text.txt').read()
-    print(mondatokra(szoveg)[-3:])
+    print to_sens2(szoveg)[-3:]
 
 
 def szavakra(mondat):
@@ -44,7 +47,7 @@ def feldolgoz(fajl):
     in the file as a list of lists."""
     kimenet = []
     szoveg = open(fajl).read()
-    for mondat in mondatokra(szoveg):
+    for mondat in to_sens2(szoveg):
         szavak = szavakra(mondat)
         kimenet.append(szavak)
     return kimenet
@@ -53,8 +56,7 @@ def feldolgoz(fajl):
 def test_process():
     """test the function feldolgoz on data/sample_text.txt"""
     adat = feldolgoz('data/sample_text.txt')
-    print(adat[:3])
-
+    print adat[:3]
 
 
 def joe(fajl):
@@ -73,23 +75,20 @@ def joe(fajl):
                 uj_mondat.append(szo)
         kimenet.append(uj_mondat)
     return kimenet
-            
 
 
 def test_joe():
     """Print the first few sentences to test your solution."""
-    joe('data/sample_text.txt')[-3:]
-
-
+    print joe('data/sample_text.txt')[-3:]
 
 
 def is_symmetric(matrix):
     """Define a function that takes as its input a list of $n$
     lists of $n$ numbers (a square matrix) and decides if it is
     symmetric (i.e. $A[i,j] == A[j,i]$ for all $i, j$)."""
-    n = len(matrix)
-    for i in range(n):
-        for j in range(n):
+    n_rows = len(matrix)
+    for i in range(n_rows):
+        for j in range(n_rows):
             if matrix[i][j] != matrix[j][i]:
                 return False
     return True
@@ -97,53 +96,46 @@ def is_symmetric(matrix):
 
 def test_symm():
     """test the func is_symmteric"""
-    test_matrix1 = [[1,2], [3,4]]
-    test_matrix2 = [[1,2], [2,1]]
+    test_matrix1 = [[1, 2], [3, 4]]
+    test_matrix2 = [[1, 2], [2, 1]]
     print is_symmetric(test_matrix1)
     print is_symmetric(test_matrix2)
-
-
-
 
 
 def transpose(matrix):
     """takes a list containing lists of equal length (i.e. a table
     of size $n\times k$) and "transposes" it, creating a table of
     size $k\times n$."""
-    n = len(matrix)
-    k = len(matrix[0])
+    n_cols = len(matrix[0])
     new_matrix = []
-    for i in range(k):
+    for i in range(n_cols):
         new_row = []
         for old_row in matrix:
             new_row.append(old_row[i])
         new_matrix.append(new_row)
     return new_matrix
-    
-
-
 
 
 def transpose2(matrix):
     """redoing 4.2.3 using nested list comprehension!"""
-    n = len(matrix)
-    m = len(matrix[0])
-    return [[matrix[i][j] for i in range(n)] for j in range(m)]
+    n_rows = len(matrix)
+    n_cols = len(matrix[0])
+    return [[matrix[i][j] for i in range(n_rows)] for j in range(n_cols)]
 
 
 def test_transpose():
     """testing transpose function"""
-    test_matrix = [[1,2,3], [4,5,6]]
-    print(transpose(test_matrix))
+    test_matrix = [[1, 2, 3], [4, 5, 6]]
+    print transpose(test_matrix)
 
 
 
-def process_data(fn):
+def process_data(filename):
     """Read a movie datafile and store it in a dictionary whose
     keys are genres and the values are list of tuples of title and year"""
     data = {}
-    f = open(fn)
-    for line in f:
+    f_obj = open(filename)
+    for line in f_obj:
         title, year, genres = line.strip().split('\t')
         title = title.strip()
         year = int(year)
@@ -152,13 +144,13 @@ def process_data(fn):
             if genre not in data:
                 data[genre] = []
             data[genre].append((title, year))
-    return data        
+    return data
 
 
 def test_movie_proc():
     """Test the process_data function on data/movies.tsv"""
     data = process_data("data/movies.tsv")
-    print(data['horror'][:5])
+    print data['horror'][:5]
 
 
 def build_index(data):
@@ -167,26 +159,26 @@ def build_index(data):
     for movie in data:
         title = movie[0]
         try:
-            a, b, c = title[:3]
+            letter1, letter2, letter3 = title[:3]
         except ValueError:
             print "skipping: {0}".format(title)
             continue
-        if a not in letter_index:
-            letter_index[a] = {}
-        if b not in letter_index[a]:
-            letter_index[a][b] = {}
-        if c not in letter_index[a][b]:
-            letter_index[a][b][c] = []
-        letter_index[a][b][c].append(movie)
+        if letter1 not in letter_index:
+            letter_index[letter1] = {}
+        if letter2 not in letter_index[letter1]:
+            letter_index[letter1][letter2] = {}
+        if letter3 not in letter_index[letter1][letter2]:
+            letter_index[letter1][letter2][letter3] = []
+        letter_index[letter1][letter2][letter3].append(movie)
     return letter_index
 
 
-def search(fn):
+def search(filename):
     """an incremental search of movie titles: users should be
     able to narrow the set of movies with every character they type."""
     data = [(title.strip(), int(year), genres.split(','))
             for title, year, genres in [line.strip().split('\t')
-                                        for line in open(fn)]]
+                                        for line in open(filename)]]
     letter_index = build_index(data)
     letter1 = raw_input()
     print letter_index[letter1]
@@ -196,9 +188,8 @@ def search(fn):
     print letter_index[letter1][letter2][letter3]
 
 
-
-
 def query():
+    """helper function to query user"""
     last_name = raw_input()
     first_name = raw_input()
     year = int(raw_input())
@@ -223,7 +214,7 @@ def query_users():
                 data[full_name] = (first_name, year, hobby)
             else:
                 data[last_name] = (first_name, year, hobby)
-                 
+
         else:
             data[full_name] = (first_name, year, hobby)
             first_guy = data[last_name]
