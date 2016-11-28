@@ -22,20 +22,12 @@ def mondatokra(szoveg):
             mondatok.append(mondat.strip())
     return mondatok
 
-
-# In[ ]:
-
 szoveg = open('data/sample_text.txt').read()
-
-
-# In[ ]:
 
 mondatokra(szoveg)[-3:]
 
 
 # Define a function that splits sentences into words, and strips punctuation marks (",", ";", etc.) from edges of words.
-
-# In[ ]:
 
 def szavakra(mondat):
     szavak = mondat.split()
@@ -47,8 +39,6 @@ def szavakra(mondat):
 
 # Use the last two functions in one that takes a filename as its argument and returns the text in the file as a list of lists. Test it on the file "data/sample_text.txt"
 
-# In[ ]:
-
 def feldolgoz(fajl):
     kimenet = []
     szoveg = open(fajl).read()
@@ -58,20 +48,14 @@ def feldolgoz(fajl):
     return kimenet
 
 
-# In[ ]:
-
 adat = feldolgoz('data/sample_text.txt')
 
-
-# In[ ]:
 
 adat[:3]
 
 
 # ### 4.1.2
 # Use the functions defined in __4.1.1__ and define a function that goes through a text and replaces all proper names (capitalized words not at the beginning of a sentence) with "Joe". Print the first few sentences to test your solution.
-
-# In[ ]:
 
 def joe(fajl):
     kimenet = []
