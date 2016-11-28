@@ -11,7 +11,7 @@ def to_sens(text):
     return sens
 
 
-# In[ ]:
+
 
 def mondatokra(szoveg):
     mondatok = []
@@ -74,7 +74,7 @@ def joe(fajl):
             
 
 
-# In[ ]:
+
 
 joe('data/sample_text.txt')[-3:]
 
@@ -82,7 +82,7 @@ joe('data/sample_text.txt')[-3:]
 # ### 4.1.3
 # Load the sample text using your function from __4.1.1__ and create a game where the user is shown a half of a word in a small context (e.g. "_Many solu\*\*\*\*\* were suggested_") and has to guess the full word (don't worry about randomization, your solution can come up with the same questions every time).
 
-# In[ ]:
+
 
 
 
@@ -93,7 +93,7 @@ joe('data/sample_text.txt')[-3:]
 # ### 4.2.1
 # Define a function that takes as its input a list of $n$ lists of $n$ numbers (a square matrix) and decides if it is symmetric (i.e. $A[i,j] == A[j,i]$ for all $i, j$).
 
-# In[ ]:
+
 
 def is_symmetric(matrix):
     n = len(matrix)
@@ -103,7 +103,7 @@ def is_symmetric(matrix):
             ...
 
 
-# In[ ]:
+
 
 test_matrix1 = [[1,2], [3,4]]
 test_matrix2 = [[1,2], [2,1]]
@@ -114,7 +114,7 @@ print is_symmetric(test_matrix2)
 # ### 4.2.2
 # Define a function that takes a list containing lists of equal length (i.e. a table of size $n\times k$) and "transposes" it, creating a table of size $k\times n$.
 
-# In[ ]:
+
 
 def transpose(matrix):
     n = len(matrix)
@@ -132,7 +132,7 @@ def transpose(matrix):
 # ### 4.2.3
 # Redo 4.2.3 using nested list comprehension!
 
-# In[ ]:
+
 
 def transpose(matrix):
     n = len(matrix)
@@ -140,12 +140,12 @@ def transpose(matrix):
     return [[matrix[i][j] for i in range(n)] for j in range(m)]
 
 
-# In[ ]:
+
 
 test_matrix = [[1,2,3], [4,5,6]]
 
 
-# In[ ]:
+
 
 transpose(test_matrix)
 
@@ -154,7 +154,7 @@ transpose(test_matrix)
 
 # Define a function that takes a list and string, then returns all elements that start with the string, along with their indices in the list.
 
-# In[ ]:
+
 
 
 
@@ -165,7 +165,7 @@ transpose(test_matrix)
 # ### 4.3.1
 # Use a dictionary to count words in our sample text (use your text processing functions!). Then print the most common words, along with their frequencies!
 
-# In[ ]:
+
 
 
 
@@ -174,7 +174,7 @@ transpose(test_matrix)
 
 # Define function that performs the factorial operation ($n!$) but caches all results so that each call requires the least possible number of multiplications.
 
-# In[ ]:
+
 
 
 
@@ -182,7 +182,7 @@ transpose(test_matrix)
 # ### 4.3.3
 # Read the dataset in "data/movies.tsv" and store it in a dictionary whose keys are genres and the values are list of tuples of title and year
 
-# In[ ]:
+
 
 def process_data(fn):
     data = {}
@@ -199,12 +199,12 @@ def process_data(fn):
     return data        
 
 
-# In[ ]:
+
 
 data = process_data("data/movies.tsv")
 
 
-# In[ ]:
+
 
 data['horror'][:5]
 
@@ -212,7 +212,7 @@ data['horror'][:5]
 # ### 4.3.4
 # Process the movies dataset (the original file or the dictionary built in __4.3.3__) and build a dictionary that indexes movies by the first letter of the title. Then create a small interface for querying (using the input function)
 
-# In[ ]:
+
 
 
 
@@ -220,7 +220,7 @@ data['horror'][:5]
 # ### 4.3.5
 # Build an incremental search of movie titles: users should be able to narrow the set of movies with every character they type. You may create deeply nested dictionaries beforehand or process the data on-the-fly.
 
-# In[ ]:
+
 
 def build_index(data):
     letter_index = {}
@@ -253,7 +253,7 @@ def search(fn):
     print letter_index[letter1][letter2][letter3]
 
 
-# In[ ]:
+
 
 def unify_dicts(dict1, dict2):
     dict3 = {}
@@ -304,7 +304,7 @@ def search(fn):
         
 
 
-# In[ ]:
+
 
 search("data/movies.tsv")
 
@@ -315,7 +315,7 @@ search("data/movies.tsv")
 # ### 4.4.1
 # Modify the word counter in __4.3.1__ so that it uses a defaultdict.
 
-# In[ ]:
+
 
 
 
@@ -323,7 +323,7 @@ search("data/movies.tsv")
 # ### 4.4.2
 # Modify the word counter in __4.4.1__ so that it uses a Counter.
 
-# In[ ]:
+
 
 
 
@@ -331,7 +331,7 @@ search("data/movies.tsv")
 # ### 4.4.3
 # Define a function that queries users for their last name, first name, year of birth, and hobby, and populates an OrderedDict whose keys are the last names and values are dictionaries with four keys each. If a second person with the same last name is encountered, both should now have keys of the form "lastname_firstname". If the same person is encountered multiple times, his/her data should be updated. Then test the solution of someone else and ask her to test yours.
 
-# In[ ]:
+
 
 def query():
     last_name = raw_input()
@@ -363,7 +363,7 @@ while True:
 # ### 4.4.4
 # Convert the database built in __4.4.3__ into a list of namedtuples.
 
-# In[ ]:
+
 
 
 
