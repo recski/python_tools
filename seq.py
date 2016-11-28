@@ -1,32 +1,14 @@
-
-# coding: utf-8
-
-# # Excercises for Day 4: Sequences
-# 
-# [4.1 Strings](#4.1)
-# 
-# [4.2 Lists](#4.2)
-# 
-# [4.3 Dictionaries](#4.3)
-# 
-# [4.4 The _collections_ module](#4.4)
-
-# ## 4.1 Strings
-# <a id='4.1'></a>
-
 # ### 4.1.1
 # Define a function that splits a text into sentences (on ".", "!", "?", etc.)
 
-# In[ ]:
-
-def mondatokra(szoveg):
-    mondatok = []
-    for darab1 in szoveg.split('.'):
-        for darab2 in darab1.split('!'):
-            for darab3 in darab2.split('?'):
-                if darab3:
-                    mondatok.append(darab3)
-    return mondatok
+def to_sens(text):
+    sens = []
+    for piece1 in text.split('.'):
+        for piece2 in piece1.split('!'):
+            for piece3 in piece2.split('?'):
+                if piece3:
+                    sens.append(piece3)
+    return sens
 
 
 # In[ ]:
