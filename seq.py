@@ -27,9 +27,10 @@ szoveg = open('data/sample_text.txt').read()
 mondatokra(szoveg)[-3:]
 
 
-# Define a function that splits sentences into words, and strips punctuation marks (",", ";", etc.) from edges of words.
 
 def szavakra(mondat):
+    """Define a function that splits sentences into words,
+    and strips punctuation marks (",", ";", etc.) from edges of words."""
     szavak = mondat.split()
     strippelt_szavak = []
     for szo in szavak:
