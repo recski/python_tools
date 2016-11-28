@@ -31,7 +31,7 @@ def test_to_sens():
     print to_sens2(szoveg)[-3:]
 
 
-def szavakra(mondat):
+def process_sentence(mondat):
     """splits sentences into words, and strips punctuation
     marks (",", ";", etc.) from edges of words."""
     szavak = mondat.split()
@@ -41,21 +41,26 @@ def szavakra(mondat):
     return strippelt_szavak
 
 
+def process_text(text):
+    """process text"""
+    output = []
+    sentences = to_sens2(text)
+    for sen in sentences:
+        output.append(process_sentence(sen))
+    return output
 
-def feldolgoz(fajl):
+
+def process_file(filename):
     """takes a filename as its argument and returns the text
     in the file as a list of lists."""
-    kimenet = []
-    szoveg = open(fajl).read()
-    for mondat in to_sens2(szoveg):
-        szavak = szavakra(mondat)
-        kimenet.append(szavak)
-    return kimenet
+    with open(filename) as file_obj:
+        text = file_obj.read()
+        return process_text(text)
 
 
 def test_process():
     """test the function feldolgoz on data/sample_text.txt"""
-    adat = feldolgoz('data/sample_text.txt')
+    adat = process_file('data/sample_text.txt')
     print adat[:3]
 
 
@@ -64,7 +69,7 @@ def joe(fajl):
     (capitalized words not at the beginning of a sentence)
     with "Joe"."""
     kimenet = []
-    adat = feldolgoz(fajl)
+    adat = process_file(fajl)
     for mondat in adat:
         uj_mondat = []
         uj_mondat.append(mondat[0])
